@@ -10,14 +10,14 @@ public class CreateNewUserUseCase implements GenericUseCase<CreateNewUserUseCase
     private final UserRepository userRepository;
     @Override
     public Output execute(Input request) {
-        return new Output(userRepository.persist(request.fromInput()).then());
+        return new Output(userRepository.persist(request.fromInput()));
     }
 
     public record Input(String userName, String password, String address) {
         User fromInput(){
-            return User.of(userName, password, address, false);
+            return User.create(userName, password, address, false);
         }
     }
 
-    public record Output(Mono<Void> result) { }
+    public record Output(Mono<User> result) { }
 }

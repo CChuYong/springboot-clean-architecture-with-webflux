@@ -13,7 +13,7 @@ public class User {
     private String address;
     private boolean admin;
 
-    public static User of(String userName, String password, String address, boolean admin) {
+    public static User create(String userName, String password, String address, boolean admin) {
         return new User(
                 Identity.NONE,
                 userName,
