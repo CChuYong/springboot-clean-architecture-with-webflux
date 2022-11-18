@@ -5,6 +5,7 @@ import example.project.entity.User;
 import example.project.infrastructure.IdentityMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("user")
@@ -13,6 +14,7 @@ public class JPAUserEntity {
     @Id
     private Long id;
 
+    @Column("user_name")
     private String userName;
 
     private String password;

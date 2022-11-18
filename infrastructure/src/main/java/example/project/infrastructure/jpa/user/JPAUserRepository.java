@@ -10,6 +10,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class JPAUserRepository implements UserRepository {
     private final JPAUserDAO repository;
+
+    @Override
+    public Mono<User> findByUserName(String userName) {
+        return this.repository.findByUserName(userName).map(JPAUserEntity::toDomain);
+    }
+
     @Override
     public Mono<User> persist(User input) {
         return this.repository.save(JPAUserEntity.fromDomain(input)).map(JPAUserEntity::toDomain);

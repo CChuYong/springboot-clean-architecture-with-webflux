@@ -39,6 +39,7 @@ subprojects {
 		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
 		// https://mvnrepository.com/artifact/org.assertj/assertj-core
+		implementation 'io.projectreactor.tools:blockhound:1.0.6.RELEASE'
 		testImplementation 'org.assertj:assertj-core:3.23.1'
 	}
 
@@ -59,9 +60,8 @@ project(':use-case') {
 project(':infrastructure') {
 	dependencies {
 		api project(':use-case')
+		api 'com.github.jasync-sql:jasync-r2dbc-mysql:2.1.7'
 		api 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-		api 'com.github.jasync-sql:jasync-mysql:2.1.7'
-		runtimeOnly 'com.mysql:mysql-connector-j'
 	}
 }
 
@@ -69,6 +69,7 @@ project(':presenter') {
 	dependencies {
 		api project(':use-case')
 		api 'org.springframework.boot:spring-boot-starter-webflux'
+		api 'org.springframework.boot:spring-boot-starter-validation'
 	}
 }
 
