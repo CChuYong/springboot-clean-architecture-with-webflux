@@ -1,4 +1,4 @@
-package project.entity;
+package example.project.entity;
 
 public class CoreException extends RuntimeException {
   public CoreException(String message) {

@@ -1,4 +1,4 @@
-package project.entity;
+package example.project.entity;
 
 public class Identity {
     public static Identity of(Long id){
