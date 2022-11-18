@@ -1,4 +1,4 @@
-package project.presenter.restapi;
+package example.project.presenter.restapi;
 
 public record APIResponse(boolean success, String message) {
     public static APIResponse ok(String message) {

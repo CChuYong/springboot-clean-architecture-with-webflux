@@ -1,10 +1,10 @@
-package project.presenter.restapi;
+package example.project.presenter.restapi;
 
+import example.project.entity.CoreException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.reactive.function.server.EntityResponse;
-import project.entity.CoreException;
 import reactor.core.publisher.Mono;
 
 @ControllerAdvice

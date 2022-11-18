@@ -1,8 +1,9 @@
-package project.presenter.restapi;
+package example.project.presenter.restapi;
 
+import example.project.usecase.GenericUseCase;
+import example.project.usecase.UseCaseExecutor;
 import org.springframework.stereotype.Component;
-import project.usecase.GenericUseCase;
-import project.usecase.UseCaseExecutor;
+
 import java.util.function.Function;
 
 @Component

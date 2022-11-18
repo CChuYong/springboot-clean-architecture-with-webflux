@@ -1,4 +1,4 @@
-package project.usecase;
+package example.project.usecase;
 
 import java.util.function.Function;
 

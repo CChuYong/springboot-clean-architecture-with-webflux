@@ -1,6 +1,6 @@
-package project.infrastructure;
+package example.project.infrastructure;
 
-import project.entity.Identity;
+import example.project.entity.Identity;
 
 public class IdentityMapper {
     public static Long map(Identity identity){
