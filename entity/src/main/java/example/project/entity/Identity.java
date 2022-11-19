@@ -1,11 +1,14 @@
 package example.project.entity;
 
+import lombok.Value;
+
+@Value
 public class Identity {
     public static Identity of(Long id){
         return new Identity(id);
     }
     public static Identity NONE = new Identity(Long.MIN_VALUE);
-    private final Long id;
+    Long id;
     public Long getId(){
         return this.id;
     }
