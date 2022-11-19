@@ -3,6 +3,7 @@ package example.project.infrastructure.jpa.user;
 import example.project.entity.Identity;
 import example.project.entity.User;
 import example.project.infrastructure.IdentityMapper;
+import example.project.infrastructure.jpa.BaseAuditEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -10,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Table("user")
 @AllArgsConstructor
-public class JPAUserEntity {
+public class JPAUserEntity extends BaseAuditEntity {
     @Id
     private Long id;
 
