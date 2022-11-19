@@ -18,7 +18,11 @@ public class CreateNewUserUseCase implements GenericUseCase<CreateNewUserUseCase
                 .result()
                 .flatMap(__ -> Mono.error(new CoreException("User already exists")))
                 .switchIfEmpty(Mono.defer(() -> this.userRepository.persist(user)))
-                .onErrorMap(x-> new CoreException("Unexpected Error"))
+                .onErrorMap(x-> {
+                    if(!(x instanceof CoreException))
+                        return new CoreException("Unexpected Error");
+                    else return x;
+                })
                 .cast(User.class);
         return new Output(result);
     }
