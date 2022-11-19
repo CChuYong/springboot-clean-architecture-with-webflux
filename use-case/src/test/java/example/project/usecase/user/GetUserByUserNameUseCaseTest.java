@@ -26,14 +26,13 @@ public class GetUserByUserNameUseCaseTest {
     public void getUserByUserNameTest(){
         String userName = "test";
         GetUserByUserNameUseCase.Input input = new GetUserByUserNameUseCase.Input(userName);
-        GetUserByUserNameUseCase.Output output = new GetUserByUserNameUseCase.Output(Mono.empty());
 
         User user = mock(User.class);
         doReturn(Mono.just(user))
                 .when(userRepository)
                 .findByUserName(anyString());
 
-        assertThat(this.getUserByUserNameUseCase.execute(input).result().block())
+        assertThat(this.getUserByUserNameUseCase.execute(Mono.just(input)).result().block())
                 .isEqualTo(user);
     }
 

@@ -33,12 +33,11 @@ public class CreateNewUserUseCaseTest {
         String address = "address";
         CreateNewUserUseCase.Input input = new CreateNewUserUseCase.Input(userName, password, address);
 
-        GetUserByUserNameUseCase.Input getUserByUserNameInput = new GetUserByUserNameUseCase.Input(userName);
         GetUserByUserNameUseCase.Output output = new GetUserByUserNameUseCase.Output(Mono.empty());
 
         doReturn(output)
                 .when(getUserByUserNameUseCase)
-                .execute(eq(getUserByUserNameInput));
+                .execute(any());
 
         Mono<User> createdUser = Mono.just(User.create(userName, password, address, false));
 
@@ -47,7 +46,7 @@ public class CreateNewUserUseCaseTest {
                 .persist(any(User.class));
 
 
-        User user = this.useCase.execute(input).result().block();
+        User user = this.useCase.execute(Mono.just(input)).result().block();
         assertThat(user).isEqualTo(createdUser.block());
     }
 
@@ -58,17 +57,15 @@ public class CreateNewUserUseCaseTest {
         String address = "address";
         CreateNewUserUseCase.Input input = new CreateNewUserUseCase.Input(userName, password, address);
 
-        GetUserByUserNameUseCase.Input getUserByUserNameInput = new GetUserByUserNameUseCase.Input(userName);
-
         Mono<User> createdUser = Mono.just(User.create(userName, password, address, false));
         GetUserByUserNameUseCase.Output output = new GetUserByUserNameUseCase.Output(createdUser);
 
         doReturn(output)
                 .when(getUserByUserNameUseCase)
-                .execute(eq(getUserByUserNameInput));
+                .execute(any());
 
 
-        assertThatThrownBy(() -> this.useCase.execute(input).result().block())
+        assertThatThrownBy(() -> this.useCase.execute(Mono.just(input)).result().block())
                 .isInstanceOf(CoreException.class)
                 .hasMessage("User already exists");
     }
@@ -80,14 +77,13 @@ public class CreateNewUserUseCaseTest {
         String address = "address";
         CreateNewUserUseCase.Input input = new CreateNewUserUseCase.Input(userName, password, address);
 
-        GetUserByUserNameUseCase.Input getUserByUserNameInput = new GetUserByUserNameUseCase.Input(userName);
         GetUserByUserNameUseCase.Output output = new GetUserByUserNameUseCase.Output(Mono.error(new RuntimeException("Some other error..")));
 
         doReturn(output)
                 .when(getUserByUserNameUseCase)
-                .execute(eq(getUserByUserNameInput));
+                .execute(any());
 
-        assertThatThrownBy(() -> this.useCase.execute(input).result().block())
+        assertThatThrownBy(() -> this.useCase.execute(Mono.just(input)).result().block())
                 .isInstanceOf(CoreException.class)
                 .hasMessage("Unexpected Error");
     }

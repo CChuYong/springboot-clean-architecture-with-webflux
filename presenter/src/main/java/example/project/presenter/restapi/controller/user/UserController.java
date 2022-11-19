@@ -15,7 +15,7 @@ public class UserController implements UserGateway{
     @Override
     public Mono<User> createNewUser(CreateNewUserRequest request) {
         return useCaseExecutor.execute(createNewUserUseCase,
-                request.toInput(),
+                Mono.just(request).map(CreateNewUserRequest::toInput),
                 CreateNewUserUseCase.Output::result);
     }
 }

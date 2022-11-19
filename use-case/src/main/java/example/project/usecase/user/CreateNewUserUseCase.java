@@ -7,20 +7,22 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class CreateNewUserUseCase implements GenericUseCase<CreateNewUserUseCase.Input, CreateNewUserUseCase.Output> {
+public class CreateNewUserUseCase implements GenericUseCase<Mono<CreateNewUserUseCase.Input>, CreateNewUserUseCase.Output> {
     private final UserRepository userRepository;
     private final GetUserByUserNameUseCase getUserByUserNameUseCase;
     @Override
-    public Output execute(Input request) {
-        User user = request.createFromInput();
-        Mono<User> result = this.getUserByUserNameUseCase
-                .execute(new GetUserByUserNameUseCase.Input(user.getUserName()))
+    public Output execute(Mono<Input> request) {
+        Mono<User> result =
+                this.getUserByUserNameUseCase.execute(request.map(user -> new GetUserByUserNameUseCase.Input(user.userName())))
                 .result()
                 .flatMap(__ -> Mono.error(new CoreException("User already exists")))
-                .switchIfEmpty(Mono.defer(() -> this.userRepository.persist(user)))
+                .switchIfEmpty(request.map(Input::createFromInput).flatMap(this.userRepository::persist))
                 .onErrorMap(x-> {
-                    if(!(x instanceof CoreException))
+                    if(!(x instanceof CoreException)){
+                        x.printStackTrace();
                         return new CoreException("Unexpected Error");
+                    }
+
                     else return x;
                 })
                 .cast(User.class);

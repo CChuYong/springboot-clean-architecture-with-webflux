@@ -15,7 +15,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/user")
 public interface UserGateway {
-    //TODO: CHANGE Request to Mono type...
     @PostMapping
     Mono<User> createNewUser(@RequestBody @Valid CreateNewUserRequest input);
 }
