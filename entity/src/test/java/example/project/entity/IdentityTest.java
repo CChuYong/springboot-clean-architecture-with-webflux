@@ -5,10 +5,19 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IdentityTest {
+
     @Test
     public void createNewInstance(){
-        long id = 100L;
+        Long id = 100L;
         Identity identity = Identity.of(id);
-        assertThat(identity.getId()).isEqualTo(id);
+        Long resultId = identity.getId();
+        assertThat(resultId).isEqualTo(id);
+    }
+
+    @Test
+    public void checkNoneEqualsInfinite(){
+        Long value = Long.MIN_VALUE;
+        Identity identity = Identity.NONE;
+        assertThat(identity.getId()).isEqualTo(value);
     }
 }
