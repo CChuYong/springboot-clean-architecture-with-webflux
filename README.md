@@ -3,7 +3,8 @@
 This project is implementation of clean architecture with spring boot webflux.  
 It generated from <https://github.com/CChuYong/spring-clean-architecture-template>  
 
-This project is minimum approach to achieve non-blocking logics using mysql database.
+This project is minimum approach to achieve non-blocking logics using mysql database.  
+It implemented default CRUD logics using webflux with tests.
 
 ## Prerequisites
 
