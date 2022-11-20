@@ -14,6 +14,8 @@ import javax.validation.Valid;
 public interface UserGateway {
     @PostMapping
     Mono<User> createNewUser(@RequestBody @Valid CreateNewUserRequest input);
+    @PatchMapping
+    Mono<User> updateUserByUserId(@RequestBody @Valid UpdateUserRequest input);
     @GetMapping("/{userId}")
     Mono<User> getUserByUserId(@PathVariable Long userId);
 }
