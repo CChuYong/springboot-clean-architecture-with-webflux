@@ -1,9 +1,6 @@
 package example.project;
 
-import example.project.usecase.user.CreateNewUserUseCase;
-import example.project.usecase.user.GetUserByIdUseCase;
-import example.project.usecase.user.GetUserByUserNameUseCase;
-import example.project.usecase.user.UserRepository;
+import example.project.usecase.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,5 +17,9 @@ public class UseCaseImplementer {
     @Bean
     public CreateNewUserUseCase createNewUserUseCase(UserRepository userRepository, GetUserByUserNameUseCase getUserByUserNameUseCase) {
         return new CreateNewUserUseCase(userRepository, getUserByUserNameUseCase);
+    }
+    @Bean
+    public UpdateUserUseCase updateUserUseCase(UserRepository userRepository, GetUserByIdUseCase getUserByIdUseCase) {
+        return new UpdateUserUseCase(userRepository, getUserByIdUseCase);
     }
 }
