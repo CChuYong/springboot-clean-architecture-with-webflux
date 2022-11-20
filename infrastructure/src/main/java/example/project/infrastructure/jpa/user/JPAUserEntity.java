@@ -24,6 +24,7 @@ public class JPAUserEntity extends BaseAuditEntity {
 
     private Boolean admin;
 
+
     public static JPAUserEntity fromDomain(User user){
         return new JPAUserEntity(
                 IdentityMapper.map(user.getIdentity()),
