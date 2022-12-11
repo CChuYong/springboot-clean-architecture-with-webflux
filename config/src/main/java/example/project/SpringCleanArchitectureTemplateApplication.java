@@ -8,7 +8,7 @@ import reactor.blockhound.BlockHound;
 public class SpringCleanArchitectureTemplateApplication {
 
 	public static void main(String[] args) {
-		BlockHound.install();
+		//BlockHound.install();
 		SpringApplication.run(SpringCleanArchitectureTemplateApplication.class, args);
 	}
 
